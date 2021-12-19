@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="titulo">Editar Actor</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <figure>
+        <img src="/img/logo-DH.png" alt="Logo Digital House">
+    </figure>
+    <h1 class="titulo">Actor Editado: <%= actor.first_name %> <%= actor.last_name %>
+    </h1>
+    <section class="formulario">
+        <form action="/actors/update/<%= actor.id %>?_method=PUT" method="POST">
+            <label for="first_name">Nombre </label>
+            <p><input type="text" name="first_name" value="<%= actor.first_name %>" required></p>
+            <label for="last_name">Apellido </label>
+            <p><input type="text" name="last_name" value="<%= actor.last_name %>" required> </p>
+            <label for="rating">Rating </label>
+            <p><input type="number" name="rating" value="<%= actor.rating %>" required></p>
+            <label for="favorite_movie_id">Película Favorita</label>
+            <p>
+                <select name="favorite_movie_id" id="" required>
+                    <% for(let i=0; i < movies.length; i++) { %>
+                        <% if(movies[i].id == actor.favorite_movie_id) { %>
+                            <option value="<%= movies[i].id %> " selected>
+                                <%= movies[i].title %> 
+                            </option>
+                        <% } else { %>
+                            <option value="<%= movies[i].id %> ">
+                                <%= movies[i].title %> 
+                            </option>
+                        <% } %>
+                    <% } %>
+                </select>
+            </p>
+            <br>
+            <p> <button class="botonAgregar" type="submit">Actualizar</button>
+
+                <a class="botonVolver" href="/actors">Listado de Actores</a>
+            </p>
+        </form>
+    </section>
+</body>
+
+</html>
